@@ -53,3 +53,57 @@ Constraints:
 1 ≤ nums.length ≤ 100
 1 ≤ l ≤ r ≤ nums.length
 −1000 ≤ nums[i] ≤ 1000
+
+import java.util.*;
+
+class day2
+{
+
+    public static int findMinEnergy(int[] arr , int l , int r)
+    {
+        int min_value = Integer.MAX_VALUE;
+        boolean foundpositive = false;
+        int n = arr.length;
+
+        for(int i=0;i<n;i++)
+        {
+            int product = 1;
+
+            for(int len=0;len < r && (i+len) < n;len++)
+            {
+                product *= arr[i+len];
+
+                if(len + 1 >= l)
+                {
+                    if(product > 0)
+                    {
+                        min_value = Math.min(min_value, product);
+                        foundpositive = true;
+                    }
+                }
+            }
+        }
+
+        return foundpositive ? min_value : -1;
+    }
+
+    
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt();
+        int l = sc.nextInt();
+        int r = sc.nextInt();
+
+        String[] str = sc.nextLine().split("");
+
+        int[] arr = new int[str.length];
+        for(int i=0;i<arr.length;i++)
+        {
+            arr[i] = Integer.parseInt(str[i]);
+        }
+
+        System.out.print(findMinEnergy(arr , l , r));
+    }
+}
