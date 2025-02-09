@@ -57,3 +57,61 @@ Explanation:
 --------------
 One way to achieve 5 consecutive blue tiles is to repaint the 4th and 9th tiles to get bridge = "BBBBBBBRRR".
 This requires 2 operations.
+
+
+import java.util.*;
+
+class day2
+{
+
+    public static int findminR(String str , int k)
+    {
+        int min_value;
+        int count = 0;
+
+        for(int i=0;i<k;i++)
+        {
+            if(str.charAt(i) == 'R')
+            {
+                count += 1;
+
+            }
+
+         
+        }
+
+        min_value = count;
+
+        for(int i=k;i<str.length();i++)
+        {
+            if(str.charAt(i-k) == 'R')
+            {
+                count -= 1;
+
+            }
+
+            if(str.charAt(i) == 'R')
+            {
+                count += 1;
+            }
+
+            min_value = Math.min(min_value, count);
+
+        }
+
+        return min_value;
+
+        
+    }
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.next();
+        int k = sc.nextInt();
+
+        System.out.print(findminR(str, k));
+
+
+    }
+}
